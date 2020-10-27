@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Aug  9 06:48:19 2019
-
-@author: Pritam
-"""
-
 ## import libraries
 import os
 import numpy as np

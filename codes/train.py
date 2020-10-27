@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Aug  8 23:57:24 2019
-
-@author: Pritam
-"""
-
-
 import os
 import logging
 logging.getLogger('tensorflow').disabled = True

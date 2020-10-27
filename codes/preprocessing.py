@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed May  6 04:11:40 2020
-
-@author: pritam
-"""
 import numpy as np
 from biosppy.signals import ecg as ecg_func
 from biosppy.signals import bvp as ppg_func
