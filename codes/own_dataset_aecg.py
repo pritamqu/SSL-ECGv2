@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Apr 24 03:25:11 2020
-
-@author: Pritam
-"""
-
 import os
 ## get filename during run time and set pwd manually
 dirname, filename = os.path.split(os.path.abspath(__file__))
