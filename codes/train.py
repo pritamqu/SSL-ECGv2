@@ -22,7 +22,7 @@ tf.logging.set_verbosity(tf.logging.ERROR)
 tf.autograph.set_verbosity(0)
 import model
 import utils
-import datasets, own_dataset
+import datasets, felicity
 
 
 ## mention paths
@@ -64,12 +64,12 @@ print(current_time)
 """ for the first time run this """ 
 if extract_data == 1:
     if data_tag == 'aecg':
-        martins_dataset.extract_martins_dataset_composite(overlap_pct=overlap_pct, window_size_sec=10, fs=256, data_path=data_folder, type_m_or_f=data_tag)
+        felicitys_dataset.extract_felicitys_dataset_composite(overlap_pct=overlap_pct, window_size_sec=10, fs=256, data_path=data_folder, type_m_or_f=data_tag)
     else:        
-        # martins_dataset.fetch_save_txt(type_m_or_f = data_tag)
-        martins_dataset.extract_martins_dataset(overlap_pct=overlap_pct, window_size_sec=10, fs=256, data_path=data_folder, type_m_or_f=data_tag)
+        # felicitys_dataset.fetch_save_txt(type_m_or_f = data_tag)
+        felicitys_dataset.extract_felicitys_dataset(overlap_pct=overlap_pct, window_size_sec=10, fs=256, data_path=data_folder, type_m_or_f=data_tag)
 
-martins_data = np.load(os.path.join(data_folder, 'martins_'+ data_tag + '_' + str(overlap_pct)+'.npy'), allow_pickle=True)
+felicitys_data = np.load(os.path.join(data_folder, 'felicitys_'+ data_tag + '_' + str(overlap_pct)+'.npy'), allow_pickle=True)
 
 graph = tf.Graph()
 print('creating graph...')
@@ -119,7 +119,7 @@ with graph.as_default():
 print('graph creation finished')
 
 """ Training """
-# final_train_index, final_test_index = datasets.train_test_split_martin_kfold(data_folder, total_fold= total_fold, overlap_pct=overlap_pct, type_m_or_f=data_tag)
+# final_train_index, final_test_index = datasets.train_test_split_felicity_kfold(data_folder, total_fold= total_fold, overlap_pct=overlap_pct, type_m_or_f=data_tag)
 
 t = tqdm.trange(total_fold, desc='kfold', leave=True, ncols=100, bar_format='{l_bar}{bar}|')
 for k in t:
@@ -138,23 +138,23 @@ for k in t:
     utils.makedirs(er_logs)
     utils.makedirs(feature_saved_path)
     
-    martin_train_data, martin_test_data = datasets.train_test_split_martin_kfold(data_folder, kfold = k, total_fold= total_fold, overlap_pct=overlap_pct, type_m_or_f=data_tag)
-    np.random.shuffle(martin_train_data)
+    felicity_train_data, felicity_test_data = datasets.train_test_split_felicity_kfold(data_folder, kfold = k, total_fold= total_fold, overlap_pct=overlap_pct, type_m_or_f=data_tag)
+    np.random.shuffle(felicity_train_data)
     
-    train_ECG   = martin_train_data[:,6:] 
-    train_stress = tf.keras.utils.to_categorical(martin_train_data[:,1], 2)
-    train_pss = martin_train_data[:,2]
-    train_pdq = martin_train_data[:,3]
-    train_fsi = martin_train_data[:,4]
-    train_cortisol = martin_train_data[:,5]
+    train_ECG   = felicity_train_data[:,6:] 
+    train_stress = tf.keras.utils.to_categorical(felicity_train_data[:,1], 2)
+    train_pss = felicity_train_data[:,2]
+    train_pdq = felicity_train_data[:,3]
+    train_fsi = felicity_train_data[:,4]
+    train_cortisol = felicity_train_data[:,5]
 
     
-    test_ECG   = martin_test_data[:,6:] 
-    test_stress = tf.keras.utils.to_categorical(martin_test_data[:,1], 2)
-    test_pss = martin_test_data[:,2]
-    test_pdq = martin_test_data[:,3]
-    test_fsi = martin_test_data[:,4]
-    test_cortisol = martin_test_data[:,5]
+    test_ECG   = felicity_test_data[:,6:] 
+    test_stress = tf.keras.utils.to_categorical(felicity_test_data[:,1], 2)
+    test_pss = felicity_test_data[:,2]
+    test_pdq = felicity_test_data[:,3]
+    test_fsi = felicity_test_data[:,4]
+    test_cortisol = felicity_test_data[:,5]
     
     training_length = train_ECG.shape[0]
     testing_length  = test_ECG.shape[0]

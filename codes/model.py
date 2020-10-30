@@ -3,7 +3,6 @@ import utils
 import keras
 import os
 import numpy as np
-from sklearn.cluster import KMeans
 window_size = 2560
 transform_task = [0, 1, 2, 3, 4, 5, 6]
 from sklearn import metrics

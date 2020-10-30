@@ -11,7 +11,7 @@ def load_data(path):
     dataset = np.load(path, allow_pickle=True)     
     return dataset 
 
-def train_test_split_martin_kfold(data_folder, kfold, total_fold, overlap_pct, type_m_or_f='mecg'):
+def train_test_split_felicity_kfold(data_folder, kfold, total_fold, overlap_pct, type_m_or_f='mecg'):
     
     def _get_train_test_index(data, kfold):
         np.random.seed(999999)
@@ -34,10 +34,10 @@ def train_test_split_martin_kfold(data_folder, kfold, total_fold, overlap_pct, t
                 
         return train_index, test_index
     
-    martins_data              = load_data(os.path.join(data_folder, 'martins_'+ type_m_or_f + '_' + str(overlap_pct)+'.npy'))
-    martin_train_index, martin_test_index = _get_train_test_index(martins_data, kfold)
-    train_data = martins_data[martin_train_index]
-    test_data = martins_data[martin_test_index]
+    felicitys_data              = load_data(os.path.join(data_folder, 'felicitys_'+ type_m_or_f + '_' + str(overlap_pct)+'.npy'))
+    felicity_train_index, felicity_test_index = _get_train_test_index(felicitys_data, kfold)
+    train_data = felicitys_data[felicity_train_index]
+    test_data = felicitys_data[felicity_test_index]
     
     return train_data, test_data
 
@@ -67,7 +67,7 @@ def get_train_test_index(data, test_pct):
             
     return train_index, test_index
 
-def train_test_index_martin(data, test_pct):
+def train_test_index_felicity(data, test_pct):
     
     def _train_test_subjects(dataset, test_pct):
         np.random.seed(12223)

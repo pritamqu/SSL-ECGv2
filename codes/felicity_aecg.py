@@ -18,8 +18,8 @@ import preprocessing
 import sklearn.preprocessing as skp
 
 
-def import_sqi(path = Path('D:\\datasets\\Biosignals\\raw_downloads\\University_of_Washington_ECG_Martin\\sqi NEW SAVER algo\\sqi'),
-               new_path = Path('D:\\datasets\\Biosignals\\final_ECG_Martin'),
+def import_sqi(path = Path('D:\\datasets\\Biosignals\\raw_downloads\\felicity\\sqi NEW SAVER algo\\sqi'),
+               new_path = Path('D:\\datasets\\Biosignals\\final_ECG_felicity'),
                type_m_or_f = 'mecg'
                ):
     
@@ -48,8 +48,8 @@ def import_sqi(path = Path('D:\\datasets\\Biosignals\\raw_downloads\\University_
                
 
 
-def fetch_save_txt(original_path = Path('D:\\datasets\\Biosignals\\raw_downloads\\University_of_Washington_ECG_Martin'),
-                    new_path = Path('D:\\datasets\\Biosignals\\final_ECG_Martin'),
+def fetch_save_txt(original_path = Path('D:\\datasets\\Biosignals\\raw_downloads\\felicity'),
+                    new_path = Path('D:\\datasets\\Biosignals\\final_ECG_felicity'),
                     old_sampling_freq = 1000,
                     new_sampling_freq = 256,
                     type_m_or_f = 'mecg'):
@@ -88,7 +88,7 @@ def fetch_save_txt(original_path = Path('D:\\datasets\\Biosignals\\raw_downloads
 
 
 
-def martins_score(path= 'D:\\datasets\\Biosignals\\final_ECG_Martin\\score.xlsx'):
+def felicitys_score(path= 'D:\\datasets\\Biosignals\\final_ECG_felicity\\score.xlsx'):
         
     labels = pd.read_excel(path)
     labels.reset_index(drop = True)
@@ -99,22 +99,22 @@ def martins_score(path= 'D:\\datasets\\Biosignals\\final_ECG_Martin\\score.xlsx'
     labels = labels.rename(columns={"FSI (bPRSA)": "fsi"})
     labels = labels.rename(columns={"CORTISOL (pg/mg of hair)": "cortisol"})
 
-    martins_labels_mecg = labels.drop(['AChE/BChE_mat', 'AChE/BChE_fet', 'total activity_fet', 'AChE_fet', 'BChE_fet', 'total activity_mat', 'PATIENT CODE'], axis=1)
-    martins_labels_mecg = martins_labels_mecg.dropna()
-    martins_labels_mecg = martins_labels_mecg[['id', 'stress', 'pss', 'pdq', 'fsi', 'AChE_mat', 'BChE_mat', 'cortisol']]
+    felicitys_labels_mecg = labels.drop(['AChE/BChE_mat', 'AChE/BChE_fet', 'total activity_fet', 'AChE_fet', 'BChE_fet', 'total activity_mat', 'PATIENT CODE'], axis=1)
+    felicitys_labels_mecg = felicitys_labels_mecg.dropna()
+    felicitys_labels_mecg = felicitys_labels_mecg[['id', 'stress', 'pss', 'pdq', 'fsi', 'AChE_mat', 'BChE_mat', 'cortisol']]
 
-    martins_labels_fecg = labels.drop(['AChE/BChE_mat', 'AChE/BChE_fet', 'total activity_fet', 'AChE_mat', 'BChE_mat', 'total activity_mat', 'PATIENT CODE'], axis=1)
-    martins_labels_fecg = martins_labels_fecg.dropna()
-    martins_labels_fecg = martins_labels_fecg[['id', 'stress', 'pss', 'pdq', 'fsi', 'AChE_fet', 'BChE_fet', 'cortisol']]
-
-
-    martins_labels_mecg.to_csv(path[:-5] + '_mecg.csv')
-    martins_labels_fecg.to_csv(path[:-5] + '_fecg.csv')
-
-    return martins_labels_mecg, martins_labels_fecg
+    felicitys_labels_fecg = labels.drop(['AChE/BChE_mat', 'AChE/BChE_fet', 'total activity_fet', 'AChE_mat', 'BChE_mat', 'total activity_mat', 'PATIENT CODE'], axis=1)
+    felicitys_labels_fecg = felicitys_labels_fecg.dropna()
+    felicitys_labels_fecg = felicitys_labels_fecg[['id', 'stress', 'pss', 'pdq', 'fsi', 'AChE_fet', 'BChE_fet', 'cortisol']]
 
 
-def extract_martins_dataset(path = Path('D:\\datasets\\Biosignals\\final_ECG_Martin'),
+    felicitys_labels_mecg.to_csv(path[:-5] + '_mecg.csv')
+    felicitys_labels_fecg.to_csv(path[:-5] + '_fecg.csv')
+
+    return felicitys_labels_mecg, felicitys_labels_fecg
+
+
+def extract_felicitys_dataset(path = Path('D:\\datasets\\Biosignals\\final_ECG_felicity'),
                          fs = 256,
                          window_size_sec=10,
                          overlap_pct = 10,
@@ -132,16 +132,16 @@ def extract_martins_dataset(path = Path('D:\\datasets\\Biosignals\\final_ECG_Mar
         
     
     if type_m_or_f == 'mecg':
-        martins_label = pd.read_csv(os.path.join(path, 'score_mecg.csv')).to_numpy()
-        martins_label = martins_label[:, 1:]
+        felicitys_label = pd.read_csv(os.path.join(path, 'score_mecg.csv')).to_numpy()
+        felicitys_label = felicitys_label[:, 1:]
         sqi_path = os.path.join(path, 'msqi')  
         sqi_files, _             = utils.import_filenames(sqi_path)
         path = path/ 'mECG_256'    
         filename, _             = utils.import_filenames(path)
         
     elif type_m_or_f == 'fecg':
-        martins_label = pd.read_csv(os.path.join(path, 'score_fecg.csv')).to_numpy()
-        martins_label = martins_label[:, 1:]
+        felicitys_label = pd.read_csv(os.path.join(path, 'score_fecg.csv')).to_numpy()
+        felicitys_label = felicitys_label[:, 1:]
         sqi_path = os.path.join(path, 'fsqi')        
         sqi_files, _             = utils.import_filenames(sqi_path)
         path = path/ 'fECG_256'
@@ -165,15 +165,15 @@ def extract_martins_dataset(path = Path('D:\\datasets\\Biosignals\\final_ECG_Mar
         segmented_sqi = segmented_sqi[:len(segmented_data)]
         segmented_data = segmented_data[np.where(segmented_sqi>=0.5)[0]]
         identity = int(filename[k][5:-4])
-        if identity in martins_label[:,0]:
+        if identity in felicitys_label[:,0]:
 
-            stress = martins_label[np.where(martins_label[:,0]==identity), 1][0][0]
-            pss = martins_label[np.where(martins_label[:,0]==identity), 2][0][0]
-            pdq = martins_label[np.where(martins_label[:,0]==identity), 3][0][0]
-            fsi = martins_label[np.where(martins_label[:,0]==identity), 4][0][0]
-            AChE = martins_label[np.where(martins_label[:,0]==identity), 5][0][0]
-            BChE = martins_label[np.where(martins_label[:,0]==identity), 6][0][0]
-            cortisol = martins_label[np.where(martins_label[:,0]==identity), 7][0][0]
+            stress = felicitys_label[np.where(felicitys_label[:,0]==identity), 1][0][0]
+            pss = felicitys_label[np.where(felicitys_label[:,0]==identity), 2][0][0]
+            pdq = felicitys_label[np.where(felicitys_label[:,0]==identity), 3][0][0]
+            fsi = felicitys_label[np.where(felicitys_label[:,0]==identity), 4][0][0]
+            AChE = felicitys_label[np.where(felicitys_label[:,0]==identity), 5][0][0]
+            BChE = felicitys_label[np.where(felicitys_label[:,0]==identity), 6][0][0]
+            cortisol = felicitys_label[np.where(felicitys_label[:,0]==identity), 7][0][0]
             
             ids = np.ones((segmented_data.shape[0], 1))*  identity
             stress = np.ones((segmented_data.shape[0], 1))* stress
@@ -191,10 +191,10 @@ def extract_martins_dataset(path = Path('D:\\datasets\\Biosignals\\final_ECG_Mar
             else:
                 dataset = np.vstack((dataset, segmented_data))
 
-    np.save((data_path + str('\\martins_'+ type_m_or_f + '_' + str(overlap_pct)+'.npy')), dataset)
+    np.save((data_path + str('\\felicitys_'+ type_m_or_f + '_' + str(overlap_pct)+'.npy')), dataset)
             
     return dataset
 
 
 # fetch_save_txt()
-# martins_dataset = extract_martins_dataset()
+# felicitys_dataset = extract_felicitys_dataset()
