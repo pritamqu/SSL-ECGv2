@@ -19,6 +19,14 @@ Authors: [Sarkar](https://www.pritamsarkar.com/) et al.
 
 Please cite our papers for any purpose of usage.
 ```
+@misc{sarkar2020detection,
+      title={Detection of Maternal and Fetal Stress from ECG with Self-supervised Representation Learning}, 
+      author={Pritam Sarkar and Silvia Lobmaier and Bibiana Fabre and Gabriela Berg and Alexander Mueller and Martin G. Frasch and Marta C. Antonelli and Ali Etemad},
+      year={2020},
+      eprint={2011.02000},
+      archivePrefix={arXiv},
+      primaryClass={q-bio.QM}
+}
   
 ```
 ### Acknowledgement
