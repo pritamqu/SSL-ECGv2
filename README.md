@@ -15,6 +15,10 @@ Authors: [Sarkar](https://www.pritamsarkar.com/) et al.
 - Pandas = 0.25.1
 - Mlxtend = 0.17.0
 
+## Pre-trained Model
+
+Self supervised pretrained model on public datasets is available [here](https://code.engineering.queensu.ca/17ps21/SSL-ECG/-/tree/master/load_model/saved_model).
+
 ## Citation
 
 Please cite our papers for any purpose of usage.
