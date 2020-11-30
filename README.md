@@ -17,7 +17,7 @@ Authors: [Sarkar](https://www.pritamsarkar.com/) et al.
 
 ## Pre-trained Model
 
-Self supervised pretrained model on public datasets is available [here](https://code.engineering.queensu.ca/17ps21/SSL-ECG/-/tree/master/load_model/saved_model).
+Self supervised pretrained model on public datasets is available [here](https://code.engineering.queensu.ca/17ps21/SSL-ECG/-/tree/master/load_model/).
 
 ## Citation
 
