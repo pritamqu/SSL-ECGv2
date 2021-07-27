@@ -1,4 +1,4 @@
-# "Detection of Maternal and Fetal Stress" (TF v1.14.0)
+# "Detection of Maternal and Fetal Stress with Self-supervised Learning" (TF v1.14.0)
 
 [Detection of Maternal and Fetal Stress from ECG with Self-supervised Representation Learning](https://)
 Authors: [Sarkar](https://www.pritamsarkar.com/) et al.
