@@ -1,6 +1,6 @@
 # "Detection of Stress with Self-supervised Learning" (TF v1.14.0)
 
-[Detection of Maternal and Fetal Stress from ECG with Self-supervised Representation Learning](https://)
+[Detection of Maternal and Fetal Stress from ECG with Self-supervised Representation Learning](https://arxiv.org/abs/2011.02000)
 Authors: [Sarkar](https://www.pritamsarkar.com/) et al.
 
 
